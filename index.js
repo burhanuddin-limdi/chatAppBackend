@@ -1,9 +1,14 @@
 const port = process.env.port || 5200;
 
-const io = require("socket.io")(port,{
-    cors:{
-        origin:'*'
-    }
+const io = require("socket.io")(port, {
+  cors: {
+    origin: "*",
+  },
+});
+const express = require("express");
+const app = express();
+app.get("/", (req, res) => {
+  res.send("<h1>Welcome to SabChat</h1>");
 });
 const users = {};
 io.on("connection", (socket) => {
