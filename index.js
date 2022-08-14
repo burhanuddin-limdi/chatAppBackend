@@ -1,15 +1,17 @@
-const port = process.env.port || 5200;
+const express = require("express");
+const app = express();
+var http = require('http').createServer(app);
+const port = 5200;
 
-const io = require("socket.io")(port, {
+const io = require("socket.io")(http, {
   cors: {
     origin: "*",
   },
 });
-const express = require("express");
-const app = express();
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to SabChat</h1>");
-});
+
+// app.get("/", (req, res) => {
+//   res.send("<h1>Welcome to SabChat</h1>");
+// });
 const users = {};
 io.on("connection", (socket) => {
   socket.on("new-user-joined", (name) => {
@@ -24,6 +26,6 @@ io.on("connection", (socket) => {
     });
   });
 });
-app.listen(3000, function(){
-  console.log("Server started on port 3000");
+http.listen(port, function(){
+  console.log("Server started on port 5200");
 });
