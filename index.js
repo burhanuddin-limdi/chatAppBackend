@@ -9,9 +9,9 @@ const io = require("socket.io")(http, {
   },
 });
 
-// app.get("/", (req, res) => {
-//   res.send("<h1>Welcome to SabChat</h1>");
-// });
+app.get("/", (req, res) => {
+  res.send("<h1>Welcome to SabChat</h1>");
+});
 const users = {};
 io.on("connection", (socket) => {
   socket.on("new-user-joined", (name) => {
